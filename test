@@ -6,9 +6,10 @@ if (Test-Path $folderPath) {
     # Get all files in the folder
     $files = Get-ChildItem -Path $folderPath -File
 
-    # Loop through each file and append ".csv" to its name
     foreach ($file in $files) {
+        # Construct new file name with .csv extension
         $newName = $file.FullName + ".csv"
+        # Rename the file
         Rename-Item -Path $file.FullName -NewName $newName
     }
 
