@@ -1,0 +1,18 @@
+# Ask for the folder path from the user
+$folderPath = Read-Host "Please enter the folder path"
+
+# Check if the folder path exists
+if (Test-Path $folderPath) {
+    # Get all files in the folder
+    $files = Get-ChildItem -Path $folderPath -File
+
+    # Loop through each file and append ".csv" to its name
+    foreach ($file in $files) {
+        $newName = $file.FullName + ".csv"
+        Rename-Item -Path $file.FullName -NewName $newName
+    }
+
+    Write-Host "All files in the folder have been renamed to have a .csv extension."
+} else {
+    Write-Host "The folder path provided does not exist. Please enter a valid path."
+}
